@@ -3,10 +3,31 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Messageapp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="PeeBox" Height="600" Width="400">
+    
+        <StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width = "*"></ColumnDefinition>
+                    <ColumnDefinition Width = "*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+            
+                <TextBlock Text =" Person1" Grid.Column = "0" Margin = "25 0 0 0"></TextBlock>
+                <TextBox Text = "IP1: " Grid.Column = "0" Margin = "25 25 25 0"></TextBox>
+                <TextBox Text = "Port: " Grid.Column = "0" Margin = "25 45 25 0"></TextBox>
+                <TextBlock Text =" Person2" Grid.Column = "1" Margin ="25 0 0 0"></TextBlock>
+                <TextBox Text = "IP2: " Grid.Column = "1" Margin = "25 25 25 0"></TextBox>
+                <TextBox Text = "Port: " Grid.Column = "1" Margin = "25 45 25 0"></TextBox>
+        </Grid>
+            <Button Height = "25" Content = "Connect" Margin = "165 10 165 25"></Button>
+            <TextBox Height = "315" Margin = "50 65 50 0" Text = "Welcome to the Chat: "></TextBox>
+            
+            <Grid>
+                <Button Height="25" Margin = "300 35 0 0" Content="Send" ></Button>
+            </Grid>
+
+            <TextBox Margin = "0 -25 90 0" Text = "Write here"></TextBox>
+        </StackPanel>
+    
 </Window>
