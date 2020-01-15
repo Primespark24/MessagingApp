@@ -1,0 +1,15 @@
+F:\Source\cs371\cs371ado\cs371entityframework\cs371entityframework\bin\Debug\cs371entityframework.exe.config
+F:\Source\cs371\cs371ado\cs371entityframework\cs371entityframework\bin\Debug\cs371entityframework.exe
+F:\Source\cs371\cs371ado\cs371entityframework\cs371entityframework\bin\Debug\cs371entityframework.pdb
+F:\Source\cs371\cs371ado\cs371entityframework\cs371entityframework\bin\Debug\BouncyCastle.Crypto.dll
+F:\Source\cs371\cs371ado\cs371entityframework\cs371entityframework\bin\Debug\Google.Protobuf.dll
+F:\Source\cs371\cs371ado\cs371entityframework\cs371entityframework\bin\Debug\MySql.Data.dll
+F:\Source\cs371\cs371ado\cs371entityframework\cs371entityframework\bin\Debug\Renci.SshNet.dll
+F:\Source\cs371\cs371ado\cs371entityframework\cs371entityframework\bin\Debug\Ubiety.Dns.Core.dll
+F:\Source\cs371\cs371ado\cs371entityframework\cs371entityframework\bin\Debug\Google.Protobuf.xml
+F:\Source\cs371\cs371ado\cs371entityframework\cs371entityframework\bin\Debug\MySql.Data.xml
+F:\Source\cs371\cs371ado\cs371entityframework\cs371entityframework\bin\Debug\Renci.SshNet.xml
+F:\Source\cs371\cs371ado\cs371entityframework\cs371entityframework\obj\Debug\cs371entityframework.csprojAssemblyReference.cache
+F:\Source\cs371\cs371ado\cs371entityframework\cs371entityframework\obj\Debug\cs371entityframework.csproj.CopyComplete
+F:\Source\cs371\cs371ado\cs371entityframework\cs371entityframework\obj\Debug\cs371entityframework.exe
+F:\Source\cs371\cs371ado\cs371entityframework\cs371entityframework\obj\Debug\cs371entityframework.pdb
