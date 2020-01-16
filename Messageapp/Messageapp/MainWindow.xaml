@@ -13,21 +13,25 @@
                     <ColumnDefinition Width = "*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
             
-                <TextBlock Text =" Person1" Grid.Column = "0" Margin = "25 0 0 0"></TextBlock>
-                <TextBox x:Name="LocalIp" Text = "IP1: " Grid.Column = "0" Margin = "25 25 25 0"></TextBox>
-                <TextBox x:Name="LocalPort" Text = "Port: " Grid.Column = "0" Margin = "25 45 25 0"></TextBox>
-                <TextBlock Text =" Person2" Grid.Column = "1" Margin ="25 0 0 0"></TextBlock>
-                <TextBox x:Name="PartnerIp" Text = "IP2: " Grid.Column = "1" Margin = "25 25 25 0"></TextBox>
-                <TextBox x:Name="PartnerPort" Text = "Port: " Grid.Column = "1" Margin = "25 45 25 0"></TextBox>
+                <TextBlock Text =" Person1:" Grid.Column = "0" Margin = "25 5 0 0"></TextBlock>
+                <TextBox x:Name="LocalIp" Grid.Column = "0" Margin = "25 25 25 0"></TextBox>
+                <TextBox x:Name="LocalPort" Grid.Column = "0" Margin = "25 45 25 0"></TextBox>
+                <TextBlock Text ="IP1:" Margin =" 5 25 170 0"></TextBlock>
+                <TextBlock Text ="Port:" Margin = "0 45 170 0"></TextBlock>
+                <TextBlock Text =" Person2:" Grid.Column = "1" Margin ="25 5 0 0"></TextBlock>
+                <TextBox x:Name="PartnerIp" Grid.Column = "1" Margin = "25 25 25 0"></TextBox>
+                <TextBox x:Name="PartnerPort" Grid.Column = "1" Margin = "25 45 25 0"></TextBox>
+                <TextBlock Text = "IP2:" Margin = "5 25 170 0" Grid.Column = "1"></TextBlock>
+                <TextBlock Text = "Port:" Margin = "0 45 170 0" Grid.Column = "1"></TextBlock>
         </Grid>
-            <Button Height = "25" Content = "Connect" Margin = "165 10 165 25"></Button>
+            <Button x:Name="button_connect" Height = "25" Content = "Connect" Margin = "165 10 165 25"></Button>
             <TextBox x:Name="ViewBox" Height = "315" Margin = "50 65 50 0" Text = "Welcome to the Chat: "></TextBox>
             
             <Grid>
-                <Button Height="25" Margin = "300 35 0 0" Content="Send" ></Button>
+                <Button x:Name="button_send" Height="25" Margin = "300 35 0 0" Content="Send" ></Button>
             </Grid>
 
-            <TextBox x:Name="MessageBox" Margin = "0 -25 90 0" Text = "Write here"></TextBox>
-        </StackPanel>
+            <TextBox x:Name="MessageBox" Margin = "0 -25 90 0"/>
+    </StackPanel>
     
 </Window>
