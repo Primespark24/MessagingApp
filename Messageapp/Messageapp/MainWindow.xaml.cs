@@ -99,15 +99,19 @@ namespace Messageapp
         {
             try
             {
+                //connection check/bind for local person
                 local = new IPEndPoint(IPAddress.Parse(LocalIp.Text), Convert.ToInt32(LocalPort.Text));
                 sock.Bind(local);
 
+                //connection check/bind for foreign person
                 Foreign = new IPEndPoint(IPAddress.Parse(PartnerIp.Text), Convert.ToInt32(PartnerPort.Text));
                 sock.Bind(Foreign);
 
+                //buffer and call back message
                 byte[] buffer = new byte[2400];
                 sock.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref Foreign, new AsyncCallback(MessageBack), buffer);
 
+                //focus set on messagebox element
                 button_connect.IsEnabled = false;
                 button_send.IsEnabled = true;
                 MessageBox.Focus();
@@ -122,6 +126,7 @@ namespace Messageapp
         {
             try
             {
+                //putting text in message box 
                 System.Text.UTF8Encoding encoding = new System.Text.UTF8Encoding();
                 byte[] msg = new byte[2400];
                 msg = encoding.GetBytes(MessageBox.Text);
