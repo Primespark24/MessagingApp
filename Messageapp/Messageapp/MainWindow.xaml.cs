@@ -37,7 +37,7 @@ namespace Messageapp
             sock.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
 
             //set Person 1 textbox in window to local Ip
-            LocalIp.Text = GetLocalIp();
+            LocalIp.Text = GetLocalIp();  
             //set Person 2 textbox in window to local Ip for testing//////////////// Also remember to change me////////////////////////////
             PartnerIp.Text = GetLocalIp();
         }
@@ -71,19 +71,71 @@ namespace Messageapp
                 //parsing data given
                 if (recieve > 0)
                 {
-                    //breaking it into char streams max 500 
-                    char[] RecievedData = new char[500];
-                    RecievedData = (char[]) Result.AsyncState;
+                    //breaking it into byte streams max 500 
+                    byte[] RecievedData = new byte[500];
+                    RecievedData = (byte[]) Result.AsyncState;
 
+                    //encoding to utf8 for message send and recieve
                     UTF8Encoding Encoding = new UTF8Encoding();
                     string MessageRecieved = Encoding.GetString(RecievedData);
 
+                    //Insert into view box
+                    ViewBox.Text.Insert(ViewBox.CaretIndex, "Friend:" + MessageRecieved);
                 }
+
+                byte[] buffer = new byte[2400];
+
+                //Begin recieve with properties allocated below
+                sock.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref Foreign, new AsyncCallback(MessageBack), buffer);
             }
             catch(Exception MessageError)
             {
                 //show excpetion in message window
-                System.Windows.MessageBox.Show(MessageError.ToString())
+                System.Windows.MessageBox.Show(MessageError.ToString());
+            }
+        }
+
+        private void Button_Click(object sent, EventArgs error)
+        {
+            try
+            {
+                local = new IPEndPoint(IPAddress.Parse(LocalIp.Text), Convert.ToInt32(LocalPort.Text));
+                sock.Bind(local);
+
+                Foreign = new IPEndPoint(IPAddress.Parse(PartnerIp.Text), Convert.ToInt32(PartnerPort.Text));
+                sock.Bind(Foreign);
+
+                byte[] buffer = new byte[2400];
+                sock.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref Foreign, new AsyncCallback(MessageBack), buffer);
+
+                button_connect.IsEnabled = false;
+                button_send.IsEnabled = true;
+                MessageBox.Focus();
+            }
+            catch(Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void Button_Click2(object sent, EventArgs error)
+        {
+            try
+            {
+                System.Text.UTF8Encoding encoding = new System.Text.UTF8Encoding();
+                byte[] msg = new byte[2400];
+                msg = encoding.GetBytes(MessageBox.Text);
+
+                //send message to client
+                sock.Send(msg);
+
+                //put message into chat
+                ViewBox.Text.Insert(ViewBox.CaretIndex, "You:" + MessageBox.Text);
+                MessageBox.Clear();
+            }
+            catch(Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString());
             }
         }
     }
