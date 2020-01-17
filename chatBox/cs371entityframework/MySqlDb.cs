@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Management;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data;
@@ -37,30 +38,54 @@ namespace cs371entityframework
             conn.Close();
         }
 
+        // Show all messages
         public List<RetrieveMessages> GetAllMessages() {
+            
             List<RetrieveMessages> showMessageObject = new List<RetrieveMessages>();
-            string sql = "SELECT username, message FROM messages";
+            
+            string sql = "SELECT * FROM chatboxdb";
+            
             using (MySqlCommand cmd = new MySqlCommand()) {
+                
                 cmd.CommandText = sql;
                 cmd.Connection = conn;
                 MySqlDataReader reader = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
+                
                 while (reader.Read()) {
                     showMessageObject.Add(new RetrieveMessages { 
-                        name = (string)reader["username"],
+                        fname = (string)reader["fname"],
+                        lname = (string)reader["lname"],
                         text = (string)reader["message"],
-                        date = (string)reader["textsubmit"]
+                        date = (string)reader["messagedate"]
                     });
                 }
+
                 reader.Close();
             }
             return showMessageObject;
         }
 
-        public void EnterMessage(string name, string message, string date)
+        public void displayAllMessages()
         {
+            List<RetrieveMessages> messages = this.GetAllMessages();
+            foreach (RetrieveMessages m in messages)
+            {
+                Console.WriteLine("\n{0}: {1}\n{2}", m.fname, m.text, m.date);
+            }
+        }
+
+        // Inputing a message
+        public void EnterMessage(string fname, string lname, string message)
+        {
+            
+            String Year = DateTime.Now.Year.ToString();
+            String Month = DateTime.Now.Month.ToString();
+            string day = Convert.ToString(DateTime.Now.Day);
+
+            string date = Year + "-" + Month + "-" + day;
             string sql = "";
             var cmd = new MySqlCommand(sql, conn); 
-            sql = "INSERT INTO chatboxdb (name, message, date) VALUES ("+ name +", "+ message +", "+ date +" )";
+            sql = "INSERT INTO chatboxdb (fname, lname, message, messagedate) VALUES ('"+ fname +"','"+ lname +"', '"+ message +"', '"+ date +"' )";
             cmd.CommandText = sql;
             cmd.Connection = conn;
 

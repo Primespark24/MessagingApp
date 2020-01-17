@@ -9,7 +9,8 @@ namespace cs371entityframework.Models
 {
     public class RetrieveMessages
     {
-        public string name { get; set; }
+        public string fname { get; set; }
+        public string lname { get; set; }
         public string text { get; set; }
         public string date { get; set; }
     }

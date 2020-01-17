@@ -1,0 +1,42 @@
+﻿<Window x:Class="chatbox.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:chatbox"
+        mc:Ignorable="d"
+        Title="ChatBox" Height="548.43" Width="949.894" Background="Black">
+    <Grid OpacityMask="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}">
+        <Grid.Background>
+            <ImageBrush ImageSource="istockphoto-1144480943-170667a.jpg"/>
+        </Grid.Background>
+        <TextBox x:Name="userInput" Margin="227,0,58,13" TextWrapping="Wrap" Background="White" SpellCheck.IsEnabled="True" FontSize="20" FontFamily="Segoe UI Semibold" Opacity="0.65" VerticalAlignment="Bottom" BorderBrush="{x:Null}" KeyDown="Text_Box_Enter"/>
+        <Label Content="" HorizontalAlignment="Left" Margin="193,0,0,14" VerticalAlignment="Bottom" RenderTransformOrigin="0.026,0.308" Width="29" Height="27">
+            <Label.Background>
+                <ImageBrush ImageSource="7760-200.png"/>
+            </Label.Background>
+        </Label>
+        <ListBox Opacity="0.585" SelectionChanged="ListBox_SelectionChanged" Background="#FF101B29" HorizontalAlignment="Left" Width="188"/>
+        <Canvas Margin="193,5,4,46" Opacity="0.5">
+            <Canvas.Effect>
+                <BlurEffect/>
+            </Canvas.Effect>
+        </Canvas>
+        <Label Content="Chat Box Users" HorizontalAlignment="Left" Margin="21,0,0,0" VerticalAlignment="Top" FontSize="20" Height="39" FontFamily="Segoe UI Semibold" Width="152" Foreground="White"/>
+        <Label Content="" HorizontalAlignment="Left" Margin="193,0,0,14" VerticalAlignment="Bottom" RenderTransformOrigin="0.026,0.308" Width="29" Height="27">
+            <Label.Background>
+                <ImageBrush ImageSource="7760-200.png"/>
+            </Label.Background>
+        </Label>
+        <Button Content="" HorizontalAlignment="Left" Margin="10,0,0,6" Width="44" BorderBrush="{x:Null}" Height="48" VerticalAlignment="Bottom">
+            <Button.Background>
+                <ImageBrush ImageSource="free-png-plus-sign-plus-icon-512.png" Stretch="Uniform"/>
+            </Button.Background>
+        </Button>
+        <Label Content="" HorizontalAlignment="Left" Margin="895,0,0,13" VerticalAlignment="Bottom" RenderTransformOrigin="0.026,0.308" Width="28" Height="27" MouseDown="Send_Button">
+            <Label.Background>
+                <ImageBrush ImageSource="send-o-512.png"/>
+            </Label.Background>
+        </Label>
+    </Grid>
+</Window>

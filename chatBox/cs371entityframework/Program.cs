@@ -13,20 +13,18 @@ namespace cs371entityframework
     {
         static void Main(string[] args)
         {
+
             // Initialize the connection with Database
-            MySqlDb chatdb = new MySqlDb("db4free.net", "masonc", "Toaster496", "chatboxdb");
+            MySqlDb chatdb = new MySqlDb("sql3.freesqldatabase.com", "sql3319340", "bFxgnIiN4x", "sql3319340");
             chatdb.OpenConnection();
 
-            chatdb.EnterMessage("Mason", "Hello", "12-03-1423");
+            chatdb.displayAllMessages();
 
-            //List<RetrieveMessages> chatObjects;
+            chatdb.OpenConnection();
+            chatdb.EnterMessage("Jerry", "Caird", "Hows it go?");
 
-            /*Console.WriteLine("Full Roster:\n");
-            foreach (FullRoster s in FullyRolly)
-            {
-                Console.WriteLine("First Name: {0} Last Name: {1} \nAge: {2} Role: {3} \nShip Name: {4} Ship Registration: {5}", s.Fname, s.Lname, s.Age, s.role, s.shipName, s.shipRegs);
-                Console.WriteLine("\n");
-            }*/
+            chatdb.displayAllMessages();
+
         }
     }
 }
