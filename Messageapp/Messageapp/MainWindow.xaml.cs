@@ -105,7 +105,7 @@ namespace Messageapp
 
                 //connection check/bind for foreign person
                 Foreign = new IPEndPoint(IPAddress.Parse(PartnerIp.Text), Convert.ToInt32(PartnerPort.Text));
-                sock.Bind(Foreign);
+                //sock.Bind(Foreign);
 
                 //buffer and call back message
                 byte[] buffer = new byte[2400];
@@ -132,7 +132,7 @@ namespace Messageapp
                 msg = encoding.GetBytes(MessageBox.Text);
 
                 //send message to client
-                sock.Send(msg);
+                sock.SendTo(msg, local);
 
                 //put message into chat
                 ViewBox.Text.Insert(ViewBox.CaretIndex, "You:" + MessageBox.Text);
