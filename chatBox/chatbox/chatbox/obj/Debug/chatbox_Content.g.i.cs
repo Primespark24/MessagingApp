@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("free-png-plus-sign-plus-icon-512.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("setting-512.png")]
 
 
