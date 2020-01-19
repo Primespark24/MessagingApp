@@ -27,51 +27,108 @@ namespace chatbox
         public MainWindow()
         {
             InitializeComponent();
-            chatdb.OpenConnection();
+            chatdb.OpenConnection(); // Opens connection to database
+            CheckForInternetConnection(); // Checks for internet connection
+            ListUsers.Items.Add(""); // adds a space to add a user from the tabel of listBox
             ListUsers.Items.Add("");
-            if (!CheckForInternetConnection())
-            {
-                MessageBox.Show("No internet connection found", "Network Error", MessageBoxButton.OK,
-                    MessageBoxImage.Error);
-            }
+            GetUserMethod(); // gets the users of UserList
         }
 
-        public static bool CheckForInternetConnection()
+        // Checks for internet connection
+        public static void CheckForInternetConnection()
         {
             try
             {
+                // Makes a connection to secure internet protocol
                 using (var client = new WebClient())
-                using (client.OpenRead("http://google.com/generate_204"))
-                    return true;
+                using (client.OpenRead("http://google.com/generate_204"));
             }
             catch
-            { return false; }
+            {
+                // If no internet exists, then we prompt the user that they are offline.
+                MessageBox.Show("No internet connection found", "Network Error", MessageBoxButton.OK,
+                      MessageBoxImage.Error);
+                //
+                //
+                //
+                // Do something for brycen stuff.
+                Environment.Exit(0);
+            }
         }
 
-        private void ListBoxItem_Selected(object sender, RoutedEventArgs e)
+        // Grabs users and places them into the userBox (ListBox)
+        private void GetUserMethod()
         {
+            List<RetrieveMessages> userList = chatdb.GetAllUsers();
+
+            // Checks list if all users in database are in the 
+            foreach (RetrieveMessages u in userList)
+            {
+                if (ListUsers.Items.Contains(u.fname + " " + u.lname))
+                {
+                    // do nothing
+                }
+                else
+                {
+                    ListUsers.Items.Add(u.fname + " " + u.lname);
+                }
+            }
+
+            chatdb.GetAllUsers().TrimExcess();
         }
 
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void GetMessageMethod(string username)
         {
-            
+            List<RetrieveMessages> messageList = chatdb.GetAllMessages();
+
+            foreach (RetrieveMessages m in messageList)
+            {
+                if (MessageView.Items.Contains(m.fname + " " + m.lname + "\n" + m.text + "\n" + m.date))
+                {
+                    // do nothing
+                }
+                else if (username == m.fname + " " + m.lname)
+                {
+                    // Indent on right
+                    // 
+                    MessageView.Items.Add(m.fname + " " + m.lname + "\n" + m.text + "\n" + m.date);
+                } 
+                else
+                {
+                    // Indent on left
+                    //
+                    MessageView.Items.Add(m.fname + " " + m.lname + "\n" + m.text + "\n" + m.date);
+                }
+            }
         }
 
+    
+
+        // Everytime the send button gets hit
         private void Send_Button(object sender, MouseButtonEventArgs e)
         {
+            string username = "";
+
+            // Delete
+            username = UserName.Text;
             string text = userInput.Text;
-            string name = UserName.Text;
 
-            string[] flname = name.Split(' ');
-            chatdb.EnterMessage(flname[0], flname[1], text);
+            string[] flname = username.Split(' ');
 
-            /*for (int i = 0; i < chatdb.GetAllUsers().Count; i++)
+            // Sends a message. If the user didn't submit a lastname, the lastname then defaults to a empty string
+            try {
+
+                chatdb.EnterMessage(flname[0], flname[1], text);
+
+            } catch (Exception)
             {
-                ListUsers.Items.Add(chatdb.GetAllUsers().get);
+                chatdb.EnterMessage(flname[0], " ", text);
             }
-            chatdb.GetAllUsers().TrimExcess();*/
-        }
+                GetUserMethod();
+                GetMessageMethod(username);
+            }
 
+        // When the textbox is focused and a user hits enter.
         private void Text_Box_Enter(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -81,9 +138,17 @@ namespace chatbox
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void getMessagesMethod(object sender, RoutedEventArgs e)
         {
-            chatdb.displayAllMessages();
+        }
+
+        private void ListBoxItem_Selected(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

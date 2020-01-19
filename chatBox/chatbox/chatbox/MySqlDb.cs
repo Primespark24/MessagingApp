@@ -51,7 +51,7 @@ namespace chatbox
 
                 cmd.CommandText = sql;
                 cmd.Connection = conn;
-                MySqlDataReader reader = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
+                MySqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
                 {
@@ -78,7 +78,7 @@ namespace chatbox
                 
                 cmd.CommandText = sql;
                 cmd.Connection = conn;
-                MySqlDataReader reader = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
+                MySqlDataReader reader = cmd.ExecuteReader();
                 
                 while (reader.Read()) {
                     showMessageObject.Add(new RetrieveMessages { 
@@ -118,6 +118,7 @@ namespace chatbox
             cmd.CommandText = sql;
             cmd.Connection = conn;
 
+           
             int result = cmd.ExecuteNonQuery();
         }
     }  
