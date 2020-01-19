@@ -1,0 +1,63 @@
+﻿<Window x:Class="chatbox.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:chatbox"
+        mc:Ignorable="d"
+        Title="ChatBox" Height="548.43" Width="949.894">
+    <!--https://stackoverflow.com/questions/4779777/wpf-rounded-corner-textbox-->
+    <Window.Resources>
+        <ControlTemplate x:Key="TextBoxBaseControlTemplate" TargetType="{x:Type TextBoxBase}">
+            <Border Background="{TemplateBinding Background}" 
+                    x:Name="Bd" BorderBrush="Transparent"
+                    BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="15">
+                <ScrollViewer x:Name="PART_ContentHost"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="Width" Value="Auto">
+                    <Setter Property="MinWidth" Value="100"/>
+                </Trigger>
+                <Trigger Property="Height" Value="Auto">
+                    <Setter Property="MinHeight" Value="20"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
+
+    <!---->
+    <Window.Background>
+        <ImageBrush ImageSource="istockphoto-1144480943-170667a.jpg"/>
+    </Window.Background>
+    <Grid Name="mainWindowContent" OpacityMask="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.Background>
+            <ImageBrush ImageSource="/istockphoto-1144480943-170667a.jpg"/>
+        </Grid.Background>
+        <TextBox Template="{StaticResource TextBoxBaseControlTemplate}" x:Name="userInput" Margin="226,0,64,13" TextWrapping="Wrap" Background="White" SpellCheck.IsEnabled="True" FontSize="18" FontFamily="Segoe UI Semibold" Opacity="0.65" VerticalAlignment="Bottom" BorderBrush="{x:Null}" KeyDown="Text_Box_Enter" Text="  " Height="29"/>
+        <Label Content="" Margin="193,0,0,15" VerticalAlignment="Bottom" RenderTransformOrigin="0.026,0.308" Height="27" HorizontalAlignment="Left" Width="29">
+            <Label.Background>
+                <ImageBrush ImageSource="pics/7760-200.png"/>
+            </Label.Background>
+        </Label>
+        <ListBox x:Name="ListUsers" Opacity="0.585" SelectionChanged="ListBox_SelectionChanged" FontFamily="white" Background="#FF101B29" HorizontalAlignment="Left" Width="194" BorderBrush="{x:Null}" Margin="-1,-1,0,-1" FontSize="20" FontWeight="Bold" Foreground="White" IsSynchronizedWithCurrentItem="False"/>
+        <Label Content="Chat Box Users" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" Height="39" FontFamily="Segoe UI Semibold" Width="152" Foreground="White" Margin="21,0,0,0" RenderTransformOrigin="1.016,0.699"/>
+        <Label Content="" Margin="0,0,19,13" RenderTransformOrigin="0.026,0.308" MouseDown="Send_Button" Height="27" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="28">
+            <Label.Background>
+                <ImageBrush ImageSource="pics/send-o-512.png"/>
+            </Label.Background>
+        </Label>
+        <TextBox Template="{StaticResource TextBoxBaseControlTemplate}" x:Name="UserName" Margin="10,0,0,13" TextWrapping="Wrap" Background="White" SpellCheck.IsEnabled="True" FontSize="18" FontFamily="Segoe UI Semibold" Opacity="0.65" VerticalAlignment="Bottom" BorderBrush="{x:Null}" KeyDown="Text_Box_Enter" Height="29" HorizontalAlignment="Left" Width="163"/>
+        <Label Content="Your Name:" Margin="10,0,0,42" FontSize="20" FontFamily="Segoe UI Semibold" Foreground="White" Height="39" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="153"/>
+        <Label Content="" Margin="0,12,10,0" RenderTransformOrigin="0.026,0.308" Height="27" VerticalAlignment="Top" HorizontalAlignment="Right" Width="29">
+            <Label.Background>
+                <ImageBrush ImageSource="setting-512.png"/>
+            </Label.Background>
+        </Label>
+        <ListBox x:Name="MessageView" Margin="226,12,64,47" BorderBrush="{x:Null}" Background="{x:Null}" FontSize="20" FontFamily="Segoe UI Semibold">
+            <ListBoxItem IsEnabled="False"/>
+        </ListBox>
+    </Grid>
+</Window>
