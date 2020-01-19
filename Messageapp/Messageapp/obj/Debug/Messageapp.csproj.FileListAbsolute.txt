@@ -1,7 +1,6 @@
 C:\Users\bmartin22\finalproject-messageapp\Messageapp\Messageapp\bin\Debug\Messageapp.exe.config
 C:\Users\bmartin22\finalproject-messageapp\Messageapp\Messageapp\bin\Debug\Messageapp.exe
 C:\Users\bmartin22\finalproject-messageapp\Messageapp\Messageapp\bin\Debug\Messageapp.pdb
-C:\Users\bmartin22\finalproject-messageapp\Messageapp\Messageapp\obj\Debug\Messageapp.csprojAssemblyReference.cache
 C:\Users\bmartin22\finalproject-messageapp\Messageapp\Messageapp\obj\Debug\MainWindow.baml
 C:\Users\bmartin22\finalproject-messageapp\Messageapp\Messageapp\obj\Debug\MainWindow.g.cs
 C:\Users\bmartin22\finalproject-messageapp\Messageapp\Messageapp\obj\Debug\App.g.cs

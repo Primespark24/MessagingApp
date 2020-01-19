@@ -63,7 +63,7 @@ namespace Messageapp
         }
 
         //message back function that dosent care what operations are happening because it has an asynchronus operation
-        public void MessageBack(IAsyncResult Result)
+        private void MessageBack(IAsyncResult Result)
         {
             try
             {
@@ -71,19 +71,19 @@ namespace Messageapp
                 //parsing data given
                 if (recieve > 0)
                 {
-                    //breaking it into byte streams max 500 
-                    byte[] RecievedData = new byte[500];
+                    //breaking it into byte streams max 
+                    byte[] RecievedData = new byte[1464];
                     RecievedData = (byte[]) Result.AsyncState;
 
                     //encoding to utf8 for message send and recieve
-                    UTF8Encoding Encoding = new UTF8Encoding();
+                    ASCIIEncoding Encoding = new ASCIIEncoding();
                     string MessageRecieved = Encoding.GetString(RecievedData);
 
                     //Insert into view box
-                    ViewBox.Text.Insert(ViewBox.CaretIndex, "Friend:" + MessageRecieved);
+                    Viewbox.Items.Add("Friend:" + MessageRecieved);
                 }
 
-                byte[] buffer = new byte[2400];
+                byte[] buffer = new byte[1500];
 
                 //Begin recieve with properties allocated below
                 sock.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref Foreign, new AsyncCallback(MessageBack), buffer);
@@ -105,13 +105,14 @@ namespace Messageapp
 
                 //connection check/bind for foreign person
                 Foreign = new IPEndPoint(IPAddress.Parse(PartnerIp.Text), Convert.ToInt32(PartnerPort.Text));
-                //sock.Bind(Foreign);
+                sock.Connect(Foreign);
 
                 //buffer and call back message
-                byte[] buffer = new byte[2400];
+                byte[] buffer = new byte[1500];
                 sock.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref Foreign, new AsyncCallback(MessageBack), buffer);
 
                 //focus set on messagebox element
+                button_connect.Content = "Connected";
                 button_connect.IsEnabled = false;
                 button_send.IsEnabled = true;
                 MessageBox.Focus();
@@ -127,15 +128,15 @@ namespace Messageapp
             try
             {
                 //putting text in message box 
-                System.Text.UTF8Encoding encoding = new System.Text.UTF8Encoding();
+                System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
                 byte[] msg = new byte[2400];
                 msg = encoding.GetBytes(MessageBox.Text);
 
                 //send message to client
-                sock.SendTo(msg, local);
+                sock.Send(msg);
 
                 //put message into chat
-                ViewBox.Text.Insert(ViewBox.CaretIndex, "You:" + MessageBox.Text);
+                Viewbox.Items.Add( "You:" + MessageBox.Text);
                 MessageBox.Clear();
             }
             catch(Exception ex)
