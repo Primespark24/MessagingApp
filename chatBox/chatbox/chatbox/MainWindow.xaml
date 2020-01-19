@@ -56,12 +56,8 @@
                 <ImageBrush ImageSource="setting-512.png"/>
             </Label.Background>
         </Label>
-        <ListView x:Name="MessageView" Margin="226,12,64,47" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" FontSize="20" FontFamily="Segoe UI Semibold">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <ListBox x:Name="MessageView" Margin="226,12,64,47" BorderBrush="{x:Null}" Background="{x:Null}" FontSize="20" FontFamily="Segoe UI Semibold">
+            <ListBoxItem IsEnabled="False"/>
+        </ListBox>
     </Grid>
 </Window>

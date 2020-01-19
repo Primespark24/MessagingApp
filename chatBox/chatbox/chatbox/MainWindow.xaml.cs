@@ -8,12 +8,17 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using chatbox.Models;
+using KeyEventArgs = System.Windows.Input.KeyEventArgs;
+using ListView = System.Windows.Forms.ListView;
+using ListViewItem = System.Windows.Controls.ListViewItem;
+using MessageBox = System.Windows.MessageBox;
 
 namespace chatbox
 {
@@ -32,6 +37,11 @@ namespace chatbox
             ListUsers.Items.Add(""); // adds a space to add a user from the tabel of listBox
             ListUsers.Items.Add("");
             GetUserMethod(); // gets the users of UserList
+        }
+
+        public void Update()
+        {
+
         }
 
         // Checks for internet connection
@@ -83,26 +93,24 @@ namespace chatbox
 
             foreach (RetrieveMessages m in messageList)
             {
+                
                 if (MessageView.Items.Contains(m.fname + " " + m.lname + "\n" + m.text + "\n" + m.date))
                 {
-                    // do nothing
+                    // do nothing since it already exists in the message
                 }
                 else if (username == m.fname + " " + m.lname)
                 {
                     // Indent on right
-                    // 
-                    MessageView.Items.Add(m.fname + " " + m.lname + "\n" + m.text + "\n" + m.date);
+                    MessageView.Items.Add("\t\t\t\t" + m.fname + " " + m.lname + "\n\t\t\t\t" + m.text + "\n\t\t\t\t" + m.date);
                 } 
                 else
                 {
                     // Indent on left
-                    //
                     MessageView.Items.Add(m.fname + " " + m.lname + "\n" + m.text + "\n" + m.date);
                 }
             }
         }
 
-    
 
         // Everytime the send button gets hit
         private void Send_Button(object sender, MouseButtonEventArgs e)
@@ -126,7 +134,8 @@ namespace chatbox
             }
                 GetUserMethod();
                 GetMessageMethod(username);
-            }
+                userInput.Text = "";
+        }
 
         // When the textbox is focused and a user hits enter.
         private void Text_Box_Enter(object sender, KeyEventArgs e)
