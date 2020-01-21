@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -16,10 +17,12 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using chatbox.Models;
 using MySql.Data.MySqlClient;
+using Application = System.Windows.Application;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 using ListView = System.Windows.Forms.ListView;
 using ListViewItem = System.Windows.Controls.ListViewItem;
 using MessageBox = System.Windows.MessageBox;
+using Path = System.IO.Path;
 
 namespace chatbox
 {
@@ -38,11 +41,15 @@ namespace chatbox
             ListUsers.Items.Add(""); // adds a space to add a user from the tabel of listBox
             ListUsers.Items.Add("");
             GetUserMethod(); // gets the users of UserList
+            GetMessageMethod();
         }
 
         public void Update()
         {
-
+            while (true)
+            {
+                GetMessageMethod();
+            }
         }
 
         // Checks for internet connection
@@ -88,8 +95,10 @@ namespace chatbox
             chatdb.GetAllUsers().TrimExcess();
         }
 
-        private void GetMessageMethod(string username)
+        private void GetMessageMethod()
         {
+
+            string username = GetUsersName();
             List<RetrieveMessages> messageList = chatdb.GetAllMessages();
 
             foreach (RetrieveMessages m in messageList)
@@ -112,30 +121,70 @@ namespace chatbox
             }
         }
 
-
-        // Everytime the send button gets hit
-        private void Send_Button(object sender, MouseButtonEventArgs e)
+        private void submitNameNTxt(string username, string text)
         {
-            string username = "";
-
-            // Delete
-            username = UserName.Text;
-            string text = userInput.Text;
 
             string[] flname = username.Split(' ');
 
             // Sends a message. If the user didn't submit a lastname, the lastname then defaults to a empty string
-            try {
-
+            try
+            {
                 chatdb.EnterMessage(flname[0], flname[1], text);
-
-            } catch (Exception)
+            }
+            catch (Exception)
             {
                 chatdb.EnterMessage(flname[0], " ", text);
             }
-                GetUserMethod();
-                GetMessageMethod(username);
-                userInput.Text = "";
+
+        }
+
+        private void setUserName()
+        {
+            string path = "UserNameFile.txt";
+            string username;
+
+            if (!File.Exists(path) && UserName.Text.Length > 0)
+            {
+                username = UserName.Text;
+
+                using (StreamWriter sw = File.CreateText(path))
+                {
+                    sw.WriteLine(username);
+                }
+            }
+            else if (!File.Exists(path) && UserName.Text.Length == 0)
+            {
+                UserName.Text = "Random Person";
+            }
+        }
+
+        private string GetUsersName()
+        {
+            string username;
+            string path = "UserNameFile.txt";
+
+            if (File.Exists(path))
+            {
+                StreamReader sr = File.OpenText(path);
+                username = sr.ReadLine();
+                return username;
+            }
+            else
+            {
+                setUserName();
+                return UserName.Text;
+            }
+            return username;
+        }
+
+        // Everytime the send button gets hit
+        private void Send_Button(object sender, MouseButtonEventArgs e)
+        {
+            string text = userInput.Text;
+            submitNameNTxt(GetUsersName(), text);
+            GetUserMethod();
+            GetMessageMethod();
+            userInput.Text = "";
         }
 
         // When the textbox is focused and a user hits enter.
@@ -144,8 +193,11 @@ namespace chatbox
             if (e.Key == Key.Enter)
             {
                 Send_Button(this, null);
-                
             }
+
+            /*Window1 w = new Window1();
+            ;
+            w.Show();*/
         }
 
         private void getMessagesMethod(object sender, RoutedEventArgs e)
@@ -157,8 +209,7 @@ namespace chatbox
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
+        { 
         }
     }
 }
