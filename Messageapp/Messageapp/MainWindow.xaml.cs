@@ -1,18 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Net;
 using System.Net.Sockets;
 
@@ -38,7 +26,7 @@ namespace Messageapp
 
             //set Person 1 textbox in window to local Ip
             LocalIp.Text = GetLocalIp();  
-            //set Person 2 textbox in window to local Ip for testing//////////////// Also remember to change me////////////////////////////
+            //set Person 2 textbox in window to local Ip for testing
             PartnerIp.Text = GetLocalIp();
         }
 
@@ -67,6 +55,7 @@ namespace Messageapp
         {
             try
             {
+                //End receive from other person
                 int recieve = sock.EndReceiveFrom(Result, ref Foreign);
                 //parsing data given
                 if (recieve > 0)
@@ -80,7 +69,7 @@ namespace Messageapp
                     string MessageRecieved = Encoding.GetString(RecievedData);
 
                     //Insert into view box
-                    Viewbox.Items.Add("Friend:" + MessageRecieved);
+                    Viewbox.Dispatcher.Invoke(() => Viewbox.Items.Add("Friend: " + MessageRecieved));
                 }
 
                 byte[] buffer = new byte[1500];
@@ -111,7 +100,7 @@ namespace Messageapp
                 byte[] buffer = new byte[1500];
                 sock.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref Foreign, new AsyncCallback(MessageBack), buffer);
 
-                //focus set on messagebox element
+                //focus set on messagebox element and change connect butoon to say connected
                 button_connect.Content = "Connected";
                 button_connect.IsEnabled = false;
                 button_send.IsEnabled = true;
@@ -136,7 +125,7 @@ namespace Messageapp
                 sock.Send(msg);
 
                 //put message into chat
-                Viewbox.Items.Add( "You:" + MessageBox.Text);
+                Viewbox.Items.Add( "You: " + MessageBox.Text);
                 MessageBox.Clear();
             }
             catch(Exception ex)
