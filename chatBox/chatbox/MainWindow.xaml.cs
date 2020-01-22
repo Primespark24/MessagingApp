@@ -104,7 +104,7 @@ namespace chatbox
             foreach (RetrieveMessages m in messageList)
             {
                 
-                if (MessageView.Items.Contains(m.fname + " " + m.lname + "\n" + m.text + "\n" + m.date))
+                if (MessageView.Items.Contains("\t\t\t" + m.fname + " " + m.lname + "\t\t\t" + "\n" + m.text + "\t\t\t" + "\n" + m.date))
                 {
                     // do nothing since it already exists in the message
                 }
@@ -138,24 +138,12 @@ namespace chatbox
 
         }
 
+        // This opens a new window to ask user for a username
         private void setUserName()
         {
-            string path = "UserNameFile.txt";
-            string username;
-
-            if (!File.Exists(path) && UserName.Text.Length > 0)
-            {
-                username = UserName.Text;
-
-                using (StreamWriter sw = File.CreateText(path))
-                {
-                    sw.WriteLine(username);
-                }
-            }
-            else if (!File.Exists(path) && UserName.Text.Length == 0)
-            {
-                UserName.Text = "Random Person";
-            }
+            Window1 userNamePrompt = new Window1();
+            userNamePrompt.ShowDialog();
+            
         }
 
         private string GetUsersName()
@@ -163,18 +151,25 @@ namespace chatbox
             string username;
             string path = "UserNameFile.txt";
 
+            // if file already exists with username in it.
             if (File.Exists(path))
-            {
+            { 
                 StreamReader sr = File.OpenText(path);
                 username = sr.ReadLine();
+                UserName.Text = username;
+                UserName.IsEnabled = false; // Makes it so you cant change username unless you go to settings
                 return username;
-            }
+            } 
             else
             {
+                username = "";
+                // calls function to open window for username input
                 setUserName();
-                return UserName.Text;
+                // Calls the getUsersName since there is now a file made to grab the username
+                GetUsersName();
+                return username;
+              
             }
-            return username;
         }
 
         // Everytime the send button gets hit
@@ -194,10 +189,6 @@ namespace chatbox
             {
                 Send_Button(this, null);
             }
-
-            /*Window1 w = new Window1();
-            ;
-            w.Show();*/
         }
 
         private void getMessagesMethod(object sender, RoutedEventArgs e)
