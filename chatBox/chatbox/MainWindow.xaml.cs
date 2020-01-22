@@ -104,7 +104,7 @@ namespace chatbox
             foreach (RetrieveMessages m in messageList)
             {
                 
-                if (MessageView.Items.Contains("\t\t\t" + m.fname + " " + m.lname + "\t\t\t" + "\n" + m.text + "\t\t\t" + "\n" + m.date))
+                if (MessageView.Items.Contains("\t\t\t" + m.fname + " " + m.lname + "\n\t\t\t" + m.text + "\n\t\t\t" + m.date) || MessageView.Items.Contains(m.fname + " " + m.lname + "\n" + m.text + "\n" + m.date))
                 {
                     // do nothing since it already exists in the message
                 }
