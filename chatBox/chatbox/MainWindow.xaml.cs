@@ -23,6 +23,8 @@ using ListView = System.Windows.Forms.ListView;
 using ListViewItem = System.Windows.Controls.ListViewItem;
 using MessageBox = System.Windows.MessageBox;
 using Path = System.IO.Path;
+using System;
+using System.Threading;
 
 namespace chatbox
 {
@@ -41,15 +43,6 @@ namespace chatbox
             ListUsers.Items.Add(""); // adds a space to add a user from the tabel of listBox
             ListUsers.Items.Add("");
             GetUserMethod(); // gets the users of UserList
-            GetMessageMethod();
-        }
-
-        public void Update()
-        {
-            while (true)
-            {
-                GetMessageMethod();
-            }
         }
 
         // Checks for internet connection
@@ -91,8 +84,8 @@ namespace chatbox
                     ListUsers.Items.Add(u.fname + " " + u.lname);
                 }
             }
-
             chatdb.GetAllUsers().TrimExcess();
+            GetMessageMethod();
         }
 
         private void GetMessageMethod()
@@ -123,19 +116,21 @@ namespace chatbox
 
         private void submitNameNTxt(string username, string text)
         {
-
             string[] flname = username.Split(' ');
 
             // Sends a message. If the user didn't submit a lastname, the lastname then defaults to a empty string
             try
             {
                 chatdb.EnterMessage(flname[0], flname[1], text);
+               
             }
             catch (Exception)
             {
                 chatdb.EnterMessage(flname[0], " ", text);
+               
             }
 
+            GetMessageMethod();
         }
 
         // This opens a new window to ask user for a username
@@ -153,15 +148,17 @@ namespace chatbox
 
             // if file already exists with username in it.
             if (File.Exists(path))
-            { 
+            {
                 StreamReader sr = File.OpenText(path);
                 username = sr.ReadLine();
                 UserName.Text = username;
                 UserName.IsEnabled = false; // Makes it so you cant change username unless you go to settings
                 return username;
+                
             } 
             else
             {
+                GetMessageMethod();
                 username = "";
                 // calls function to open window for username input
                 setUserName();
@@ -180,6 +177,7 @@ namespace chatbox
             GetUserMethod();
             GetMessageMethod();
             userInput.Text = "";
+            GetMessageMethod();
         }
 
         // When the textbox is focused and a user hits enter.
@@ -187,6 +185,7 @@ namespace chatbox
         {
             if (e.Key == Key.Enter)
             {
+                GetMessageMethod();
                 Send_Button(this, null);
             }
         }
