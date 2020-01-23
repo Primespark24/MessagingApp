@@ -26,8 +26,6 @@ namespace Messageapp
 
             //set Person 1 textbox in window to local Ip
             LocalIp.Text = GetLocalIp();  
-            //set Person 2 textbox in window to local Ip for testing
-            PartnerIp.Text = GetLocalIp();
 
             //set user ports automagically
             LocalPort.Text = "80";
