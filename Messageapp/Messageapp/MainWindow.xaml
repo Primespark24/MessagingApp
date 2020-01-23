@@ -30,7 +30,7 @@
                 <Button x:Name="button_send" Height="25" Margin = "300 35 0 0" Content="Send" Click = "Button_Click2"></Button>
             </Grid>
 
-            <TextBox x:Name="MessageBox" Margin = "0 -25 90 0" SpellCheck.IsEnabled="True"/>
+            <TextBox x:Name="MessageBox" Margin = "0 -25 90 0" SpellCheck.IsEnabled="True" KeyDown="enterKey"/>
     </StackPanel>
     
 </Window>
