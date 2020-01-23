@@ -113,22 +113,22 @@ namespace chatbox
             int result = cmd.ExecuteNonQuery();
         }
 
-        /*private void deleteOldMessages()
+        private void deleteOldMessages()
         {
 
-            string sql = "DELETE FROM chatboxdb WHERE message = @Lname";
-            MySqlParameter param = new MySqlParameter
+            string sql = "DELETE FROM chatboxdb;";
+            /*MySqlParameter param = new MySqlParameter
             {
                 ParameterName = "@Lname",
                 Value = "simple instructions",
                 MySqlDbType = MySqlDbType.VarChar,
                 Size = 20
-            };
+            };*/
             var cmd = new MySqlCommand(sql, conn);
             cmd.CommandText = sql;
             cmd.Connection = conn;
-            cmd.Parameters.Add(param);
-        }*/
+            /*cmd.Parameters.Add(param);*/
+        }
     }  
 }
             
