@@ -153,12 +153,13 @@ namespace chatbox
                 username = sr.ReadLine();
                 UserName.Text = username;
                 UserName.IsEnabled = false; // Makes it so you cant change username unless you go to settings
+                sr.Close();
                 return username;
                 
             } 
             else
             {
-                GetMessageMethod();
+                
                 username = "";
                 // calls function to open window for username input
                 setUserName();
@@ -185,7 +186,6 @@ namespace chatbox
         {
             if (e.Key == Key.Enter)
             {
-                GetMessageMethod();
                 Send_Button(this, null);
             }
         }
@@ -200,6 +200,17 @@ namespace chatbox
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         { 
+        }
+
+        private void Label_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            GetMessageMethod();
+        }
+
+        private void GoToSettings(object sender, MouseButtonEventArgs e)
+        {
+            settings settingPage = new settings();
+            settingPage.ShowDialog();
         }
     }
 }

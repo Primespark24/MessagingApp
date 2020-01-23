@@ -36,10 +36,10 @@
         <Grid.Background>
             <ImageBrush ImageSource="/istockphoto-1144480943-170667a.jpg"/>
         </Grid.Background>
-        <TextBox Template="{StaticResource TextBoxBaseControlTemplate}" x:Name="userInput" Margin="226,0,64,13" TextWrapping="Wrap" Background="White" SpellCheck.IsEnabled="True" FontSize="18" FontFamily="Segoe UI Semibold" Opacity="0.65" VerticalAlignment="Bottom" BorderBrush="{x:Null}" KeyDown="Text_Box_Enter" Text="  " Height="29"/>
-        <Label Content="" Margin="193,0,0,15" VerticalAlignment="Bottom" RenderTransformOrigin="0.026,0.308" Height="27" HorizontalAlignment="Left" Width="29">
+        <TextBox Template="{StaticResource TextBoxBaseControlTemplate}" x:Name="userInput" Margin="231,0,64,13" TextWrapping="Wrap" Background="White" SpellCheck.IsEnabled="True" FontSize="18" FontFamily="Segoe UI Semibold" Opacity="0.65" VerticalAlignment="Bottom" BorderBrush="{x:Null}" KeyDown="Text_Box_Enter" Height="29" AutomationProperties.HelpText="Type your message..."/>
+        <Label Content="" Margin="193,0,0,10" VerticalAlignment="Bottom" RenderTransformOrigin="0.026,0.308" Height="32" HorizontalAlignment="Left" Width="38" MouseDown="Label_MouseDown">
             <Label.Background>
-                <ImageBrush ImageSource="pics/7760-200.png"/>
+                <ImageBrush ImageSource="refresh-512 (1).png" Stretch="UniformToFill"/>
             </Label.Background>
         </Label>
         <ListBox x:Name="ListUsers" Opacity="0.585" SelectionChanged="ListBox_SelectionChanged" FontFamily="white" Background="#FF101B29" HorizontalAlignment="Left" Width="194" BorderBrush="{x:Null}" Margin="-1,-1,0,-1" FontSize="20" FontWeight="Bold" Foreground="White" IsSynchronizedWithCurrentItem="False"/>
@@ -51,7 +51,7 @@
         </Label>
         <TextBox Template="{StaticResource TextBoxBaseControlTemplate}" x:Name="UserName" Margin="10,0,0,13" TextWrapping="Wrap" Background="White" SpellCheck.IsEnabled="True" FontSize="18" FontFamily="Segoe UI Semibold" Opacity="0.65" VerticalAlignment="Bottom" BorderBrush="{x:Null}" KeyDown="Text_Box_Enter" Height="29" HorizontalAlignment="Left" Width="163"/>
         <Label Content="Your Name:" Margin="10,0,0,42" FontSize="20" FontFamily="Segoe UI Semibold" Foreground="White" Height="39" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="153"/>
-        <Label Content="" Margin="0,12,10,0" RenderTransformOrigin="0.026,0.308" Height="27" VerticalAlignment="Top" HorizontalAlignment="Right" Width="29">
+        <Label Content="" Margin="0,12,10,0" RenderTransformOrigin="0.026,0.308" Height="27" VerticalAlignment="Top" HorizontalAlignment="Right" Width="29" MouseDown="GoToSettings">
             <Label.Background>
                 <ImageBrush ImageSource="setting-512.png"/>
             </Label.Background>

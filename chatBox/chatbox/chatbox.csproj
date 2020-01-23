@@ -79,6 +79,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="settings.xaml.cs">
+      <DependentUpon>settings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
@@ -94,6 +97,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Window1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -133,16 +140,10 @@
     <Resource Include="pics\istockphoto-1144480943-170667a.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="pics\sendicon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="pics\send-o-512.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="pics\7760-200.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="pics\free-png-plus-sign-plus-icon-512.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="istockphoto-1144480943-170667a.jpg" />
@@ -152,6 +153,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="setting-512.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="refresh-512 %281%29.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

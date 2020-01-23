@@ -34,6 +34,7 @@ namespace chatbox
             using (StreamWriter sw = File.CreateText(path))
             {
                 sw.WriteLine(username);
+                sw.Close();
             }
            
             
