@@ -26,8 +26,10 @@ namespace Messageapp
 
             //set Person 1 textbox in window to local Ip
             LocalIp.Text = GetLocalIp();  
-            //set Person 2 textbox in window to local Ip for testing
-            PartnerIp.Text = GetLocalIp();
+
+            //set user ports automagically
+            LocalPort.Text = "80";
+            PartnerPort.Text = "80";
         }
 
         private string GetLocalIp()
@@ -64,7 +66,7 @@ namespace Messageapp
                     byte[] RecievedData = new byte[1464];
                     RecievedData = (byte[]) Result.AsyncState;
 
-                    //encoding to utf8 for message send and recieve
+                    //encoding to ascii for message send and recieve
                     ASCIIEncoding Encoding = new ASCIIEncoding();
                     string MessageRecieved = Encoding.GetString(RecievedData);
 
@@ -131,6 +133,14 @@ namespace Messageapp
             catch(Exception ex)
             {
                 System.Windows.MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void enterKey(object sender, System.Windows.Input.KeyEventArgs enter)
+        {
+            if(enter.Key == System.Windows.Input.Key.Enter)
+            {
+                Button_Click2(this, null);
             }
         }
     }
