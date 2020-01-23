@@ -20,7 +20,7 @@ namespace chatbox
 
         public DBChat()
         {
-            chatdb = new MySqlDb("sql3.freesqldatabase.com", "sql3319340", "bFxgnIiN4x", "sql3319340");
+            chatdb = new MySqlDb("cs1", "mason", "YouMustTrainAndPolishYourself", "mason");
             InitializeComponent();
             chatdb.OpenConnection(); // Opens connection to database
             CheckForInternetConnection(); // Checks for internet connection

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:chatbox"
         mc:Ignorable="d"
-        Title="ChatBox" Height="548.43" Width="949.894">
+        Title="ChatBox" Height="548.43" Width="949.894" Icon="Picture1.png">
     <!--https://stackoverflow.com/questions/4779777/wpf-rounded-corner-textbox-->
     <Window.Resources>
         <ControlTemplate x:Key="TextBoxBaseControlTemplate" TargetType="{x:Type TextBoxBase}">
