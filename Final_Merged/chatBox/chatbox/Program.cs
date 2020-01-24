@@ -12,6 +12,9 @@ namespace chatbox
 {
     class Program
     {
+
+        // This was our first class we made to test code before we went into WPF
+        
         // Initialize the connection with Database
             //MySqlDb chatdb = new MySqlDb("sql3.freesqldatabase.com", "sql3319340", "bFxgnIiN4x", "sql3319340");
             /*chatdb.OpenConnection();
